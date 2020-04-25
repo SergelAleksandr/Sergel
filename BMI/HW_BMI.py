@@ -57,4 +57,9 @@ if ibmi >= 40:
 else:
     pass
 
+if ibmi > 100:
+    print('Проверьте введенные данные')
+else:
+    pass
+
 print(str('0') + ('=' * int(ibmi - 1)) + '|' + ('=' * int(99 - ibmi)) + str('100'))
