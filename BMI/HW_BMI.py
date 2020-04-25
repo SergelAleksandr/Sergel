@@ -24,7 +24,6 @@ ibmi = int(bmi)
 
 if ibmi > 100:
     print('Проверьте введенные данные')
-    exit
 else: 
     pass
 
