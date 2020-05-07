@@ -18,7 +18,8 @@ while True:
         '1. Новый пользователь \n'
         '2. Расчет \n'
         '3. Данные \n'
-        '(Выберите "1", "2" или "3")')
+        '4. Выход \n'
+        '(Выберите "1", "2", "3" или "4")')
     
     while True:
         try:
@@ -66,10 +67,8 @@ while True:
         print(list(dlist))
         user = input('Напишите ФИО пользователя из списка: ')
         print(dlist[user])
-        weight = dlist[user][0]
-        height = dlist[user][1]
-    
-        bmi = weight / (height ** 2)
+         
+        bmi = dlist[user][0] / (dlist[user][1] ** 2)
         print('Ваш ИМТ составляет: ', bmi)
 
         ibmi = int(bmi)
@@ -99,5 +98,7 @@ while True:
     
     if choice == 3:
         print(dlist)
-        exit
-    
+        
+    if choice == 4:
+        break
+
