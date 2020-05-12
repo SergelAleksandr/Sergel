@@ -29,15 +29,14 @@ def choise():
             
 def choise_options(answer):
     if answer == 1:
-        input_user()
+        new = input_user()
+        save_user(new)
     elif answer == 2:
-        # search_user()
-        # calc = search_user()
-        calc_user()
+        calc = search_user()
+        calc_user(calc)
     elif answer == 3:
-        # search_for_del()
-        # away = search_for_del()
-        del_user()
+        away = search_for_del()
+        del_user(away)
     
     # elif answer != (1 or 2 or 3):
     #     print('Введите число от 1 до 4')
@@ -59,7 +58,7 @@ def input_user():
         else:
             break
     while True:
-        sex = str(input('Выберите пол (М/Ж): '))
+        sex = str(input('Выберите пол (М/Ж): ').upper())
         if sex == 'М':
             True
             break
@@ -75,49 +74,28 @@ def input_user():
             print('Введите число')
         else:
             break
+    new = {'ФИО' : name, 'Вес' : weight, 'Рост' : height, 'Пол' : sex, 'Возраст' : age}
+    return new
+
+def save_user(new):
     global bmi_list
-    values = [weight, height, sex, age]
-    if bmi_list == None:
-        bmi_list = {name : values}
+    bmi_list[str(uuid.uuid4())] = new
+    print(bmi_list.values())
+  
+def search_user():
+    print(list(bmi_list.values()))
+    calc = input('Введите пользователя: ')
+    for calc in bmi_list:
+        break
     else:
-        bmi_list[name] = values
-    # bmi_list = {name : {'Рост' : height, 'Пол' : sex, 'Возраст' : age}}
-    # new = {'ФИО' : name, 'Рост' : height, 'Пол' : sex, 'Возраст' : age}
-    # global bmi_list
-    # key = str(uuid.uuid4())
-    # bmi_list[str(uuid.uuid4())] = new
-
-
-# def save_user(new_user):
-#     global bmi_list
-#     key = str(uuid.uuid4())
-#     bmi_list[str(uuid.uuid4())] = {new_user}
-#     print(bmi_list)
+        print('Нет такого пользователя. Повторите попытку: ')
+    return calc
     
-
-
-
-# def search_user():
-    # for values in bmi_list.items:
-    #     print(value)
-    # calc = input('Введите пользователя: ')
-    # print(calc)
-    # get_calc = bmi_list.get[calc]
-    # for value in get_calc:
-    #     print(calc)
-    # else:
-    #     print('Нет такого пользователя, повторите попытку: ')
-    # return calc
+def calc_user(calc): 
+    cool = bmi_list[calc]
+    print(cool)
+    bmi = cool['Вес'] / (cool['Рост'] ** 2)
     
-def calc_user(): 
-    print(list(bmi_list))
-    calc = input('Напишите ФИО пользователя из списка: ')
-    print(bmi_list[calc])
-        
-    bmi = bmi_list[calc][0] / (bmi_list[calc][1] ** 2)
-    
-    # bmi_calc = bmi_list.get[calc, None]   
-    # bmi = bmi_calc[1] / (bmi_calc[2] ** 2)
     print('Ваш ИМТ составляет: ', bmi)
     ibmi = int(bmi)
     if ibmi > 100:
@@ -141,29 +119,35 @@ def calc_user():
     if ibmi <100:
         print(str('0') + ('=' * int(ibmi - 1)) + '|' + ('=' * int(99 - ibmi)) + str('100'))
 
-# def search_for_del():
-#     for _, value in bmi_list.items:
-#         print(value)
-#     away = input('Введите пользователя из спискадля удаления: ')
-#     for away in bmi_list.items:
-#         print(away)
-#     return away
+def search_for_del():
+    print(list(bmi_list.values()))
+    user_del = input('Введите пользователя для удаления: ')
+    for user_del in bmi_list:
+        break
+    else:
+        print('Нет такого пользователя. Повторите попытку: ')
+    return user_del
 
-def del_user():
+def del_user(away):
     global bmi_list
-    print(list(bmi_list))
-    away = input('Напишите ФИО пользователя из списка: ')
+    out_away = bmi_list[away]
+    print(out_away)
+    def get_key(bmi_list, out_away):
+        for k, v in bmi_list.items():
+            if v == out_away:
+                return k
     while True:
         ans = str(input('Вы действительно хотите удалить данного пользователя? (yes или no) '))
         if ans == 'yes':
-            bmi_list.pop(away) 
+            bmi_list.pop(get_key(bmi_list, out_away)) 
             break
         else:
             print('Повторите выбор (yes/no)') 
-    return bmi_list
+    return bmi_list.values()
 
 
 def main():
+    print('Калькулятор индекса массы тела')
     while True:
         main_menu()
         answer = choise()
