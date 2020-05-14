@@ -7,8 +7,8 @@ with open('Apache_log.txt', 'r') as fp:
 with open('Apache_log.txt', 'r') as fp:
     print('2. Количество уникальных ID: ')
     id_list = []
+    line = fp.readline()
     for line in fp:
-        line = str(fp.readline())
         unique = line.split(" ")[0]
         if unique not in id_list:
             id_list.append(unique)
@@ -22,8 +22,9 @@ with open('Apache_log.txt', 'r') as fp:
     iceweasel = []
     trident = []
     
+    line = fp.readline()
+    
     for line in fp:
-        line = str(fp.readline())
         select = line.rsplit(' ')[-1]
         s_sel = select.split('/')[0]
         saf = 'Safari'
@@ -41,16 +42,9 @@ with open('Apache_log.txt', 'r') as fp:
             iceweasel.append(s_sel)
         elif tri in select:
             trident.append(s_sel)
+
     print('Браузер Safari: ' + str(len(safari)))
     print('Браузер Firefox: ' + str(len(firefox)))
     print('Браузер Chrome: ' + str(len(chrome)))
     print('Браузер Iceweasel: ' + str(len(iceweasel)))
     print('Браузер Microsoft Trident: ' + str(len(iceweasel)))
-
-# fp.seek(0)
-
-
-
-
-# for line in fp: # the same as readline, memory safe
-#     print(line)
